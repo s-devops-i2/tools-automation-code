@@ -12,7 +12,7 @@ pipelines:
         auto_update: true
         branch: main
     stages:
-      - DEV:
+      - ansible:
 
           fetch_materials: true
           keep_artifacts: false
@@ -21,8 +21,8 @@ pipelines:
             type: manual
             allow_only_on_success: false
           jobs:
-            ansible-playbook:
+            ansible:
               timeout: 0
               tasks:
-                - exec: {command: ansible-playbook, arguments: ["-i","172.31.89.127,", "-e","ansible_user=ec2-user","-e","ansible_password=DevOps321", "-e","tool_name=prometheus","tools.yml"],run_if: passed}
+                - exec: {command: ansible-playbook, arguments: ["-i","172.31.84.19,", "-e","ansible_user=ec2-user","-e","ansible_password=DevOps321", "-e","tool_name=prometheus","tools.yml"],run_if: passed}
 

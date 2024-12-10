@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
- tools:
+ Prometheus:
   group: Terraform
   label_template: ${COUNT}
   lock_behavior: none

@@ -5,3 +5,4 @@ variable "tools_details" {
     }
   }
 }
+variable "zone_id" {}

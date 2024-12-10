@@ -1,0 +1,5 @@
+- name: Download and Install prometheus
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus/prometheus/releases/download/v2.53.3/prometheus-2.53.3.linux-amd64.tar.gz
+    dest: /opt
+    remote_src: yes

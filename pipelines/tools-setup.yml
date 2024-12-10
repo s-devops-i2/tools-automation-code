@@ -1,0 +1,28 @@
+format_version: 10
+pipelines:
+  Tools:
+    group: tools
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-3caedef:
+        git: https://github.com/s-devops-i2/tools-automation-code.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - DEV:
+
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: manual
+            allow_only_on_success: false
+          jobs:
+            ansible-playbook:
+              timeout: 0
+              tasks:
+                - exec: {command: ansible-playbook, arguments: ["-i","172.31.89.127,", "-e","ansible_user=ec2-user","-e","ansible_password=DevOps321", "-e","tool_name=prometheus","tools.yml"],run_if: passed}
+

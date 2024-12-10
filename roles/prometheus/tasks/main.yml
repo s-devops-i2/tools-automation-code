@@ -4,3 +4,15 @@
     dest: /opt
     remote_src: yes
 
+- name: Copy Prometheus Service file
+  ansible.builtin.template:
+    src: prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+
+- name: Start Prometheus
+  ansible.builtin.systemd_service:
+    state: restarted
+    name: prometheus
+    enabled: true
+    daemon_reload: true
+

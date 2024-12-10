@@ -1,7 +1,7 @@
 format_version: 10
 pipelines:
- Prometheus:
-  group: Terraform
+ tools-tf-apply:
+  group: TerraformGroup
   label_template: ${COUNT}
   lock_behavior: none
   display_order: -1
@@ -20,7 +20,7 @@ pipelines:
           type: manual
           allow_only_on_success: false
         jobs:
-          Prometheus:
+          tools-tf-apply:
             timeout: 0
             tasks:
               - exec: {command: terraform, arguments: ["init"],run_if: passed}

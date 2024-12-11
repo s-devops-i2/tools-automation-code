@@ -17,26 +17,26 @@ resource "aws_route53_record" "record" {
 }
 
 resource "aws_iam_role" "prometheus_role" {
-  name =  "${var.name}-role"
+  name = "${var.name}-role"
 
   assume_role_policy = jsonencode({
     Version   = "2012-10-17"
     Statement = [
       {
-        Action    = "sts:AssumeRole"
-        Effect    = "Allow"
-        Sid       = ""
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
         Principal = {
           Service = "ec2.amazonaws.com"
         }
       },
     ]
-  }
+  })
   inline_policy {
     name = "${var.name}-inline-policy"
 
     policy = jsonencode({
-      Version = "2012-10-17"
+      Version   = "2012-10-17"
       Statement = [
         {
           Action   = var.policy_resource_list
@@ -45,22 +45,11 @@ resource "aws_iam_role" "prometheus_role" {
         },
       ]
     })
-  })
+  }
   tags = {
     tag-key = "${var.name}-role"
   }
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action   = ["ec2:Describe*"]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
 }
-
 
 
 resource "aws_iam_instance_profile" "prom_inst_profile" {

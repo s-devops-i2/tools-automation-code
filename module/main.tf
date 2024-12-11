@@ -31,7 +31,7 @@ resource "aws_iam_role" "prometheus_role" {
         }
       },
     ]
-  })
+  }
   inline_policy {
     name = "${var.name}-inline-policy"
 
@@ -45,7 +45,7 @@ resource "aws_iam_role" "prometheus_role" {
         },
       ]
     })
-  }
+  })
   tags = {
     tag-key = "${var.name}-role"
   }

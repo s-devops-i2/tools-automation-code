@@ -32,11 +32,36 @@ resource "aws_iam_role" "prometheus_role" {
       },
     ]
   })
+  inline_policy {
+    name = "${var.name}-inline-policy"
 
+    policy = jsonencode({
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = var.policy_resource_list
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    })
+  }
   tags = {
     tag-key = "${var.name}-role"
   }
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["ec2:Describe*"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
+
+
 
 resource "aws_iam_instance_profile" "prom_inst_profile" {
   name = "${var.name}-role"

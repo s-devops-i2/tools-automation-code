@@ -10,6 +10,12 @@
     src: prometheus.service
     dest: /etc/systemd/system/prometheus.service
 
+- name: Copy Prometheus config file
+  ansible.builtin.template:
+    src: prometheus.yml
+    dest: /opt/prometheus-2.53.3.linux-amd64
+
+
 - name: Start Prometheus
   ansible.builtin.systemd_service:
     state: restarted

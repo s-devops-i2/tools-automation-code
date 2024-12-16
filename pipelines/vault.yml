@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  Prometheus:
+  vault:
     group: tools
     label_template: ${COUNT}
     lock_behavior: none

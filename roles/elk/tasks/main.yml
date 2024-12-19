@@ -37,7 +37,10 @@
 - name: Start Kibana
   ansible.builtin.systemd_service:
     name: kibana
-    state: restarted
+    state: started
+    enabled: true
+    daemon_reload: true
+
 
 # Reset the password of the elastic built-in superuser with
 # /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic

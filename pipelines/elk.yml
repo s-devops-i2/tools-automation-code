@@ -1,0 +1,30 @@
+format_version: 10
+pipelines:
+  elk:
+    group: tools
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-3caedef:
+        git: https://github.com/s-devops-i2/tools-automation-code.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - ansible:
+
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: manual
+            allow_only_on_success: false
+          jobs:
+            ansible:
+              timeout: 0
+              tasks:
+                - exec: {command: ansible-playbook, arguments: [ "-i", "elk-internal.shujathdevops.online,", "tools.yml", "-e", "tool_name=elk", "-e", "ansible_user=ec2-user", "-e", "ansible_password=DevOps321" ], run_if: passed}
+
+
+

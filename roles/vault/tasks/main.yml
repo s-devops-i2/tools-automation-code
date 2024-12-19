@@ -1,3 +1,6 @@
+- name: Setting up prompt for elk
+  ansible.builtin.shell: set-prompt Vault
+
 - name: vault setup
   ansible.builtin.shell: yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 

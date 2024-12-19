@@ -1,3 +1,6 @@
+- name: Setting up prompt for elk
+  ansible.builtin.shell: set-prompt Grafana
+
 -  name: copy grafana repo file
    ansible.builtin.template:
       src: grafana.repo

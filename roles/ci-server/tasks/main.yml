@@ -1,0 +1,16 @@
+- name: setup prompt for ci-server
+  ansible.builtin.shell: set-prompt ci-server
+
+- name: Create directory
+  ansible.builtin.file:
+    path: /home/ec2-user/actions-runner
+    state: directory
+  become_user: ec2-user
+
+- name: Download runner
+  ansible.builtin.unarchive:
+    src: https://github.com/actions/runner/releases/download/v2.322.0/actions-runner-linux-x64-2.322.0.tar.gz
+    dest: /home/ec2-user/actions-runner
+    remote_src: yes
+  become_user: ec2-user
+

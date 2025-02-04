@@ -14,3 +14,6 @@
     remote_src: yes
   become_user: ec2-user
 
+- name: install dependencies
+  ansible.builtin.shell: /home/ec2-user/actions-runner/bin/installdependencies.sh
+

@@ -1,0 +1,18 @@
+- name: Setting up prompt for sonarqube
+  ansible.builtin.shell: set-prompt SonarQube
+
+- name: Add sonarqube User
+  ansible.builtin.user:
+    name: sonar
+
+- name: Install java17
+  ansible.builtin.dnf:
+    name: java-17-openjdk
+    state: installed
+
+- name: Download SonarQube
+  ansible.builtin.unarchive:
+    src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.1.0.102122.zip
+    dest: /opt
+    remote_src: yes
+  become_user: sonar

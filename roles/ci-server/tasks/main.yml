@@ -3,17 +3,43 @@
 
 - name: Create directory
   ansible.builtin.file:
-    path: /home/ec2-user/actions-runner
+    path: /home/ec2-user/github-runner
     state: directory
   become_user: ec2-user
 
 - name: Download runner
   ansible.builtin.unarchive:
     src: https://github.com/actions/runner/releases/download/v2.322.0/actions-runner-linux-x64-2.322.0.tar.gz
-    dest: /home/ec2-user/actions-runner
+    dest: /home/ec2-user/github-runner
     remote_src: yes
   become_user: ec2-user
 
 - name: install dependencies
-  ansible.builtin.shell: /home/ec2-user/actions-runner/bin/installdependencies.sh
+  ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
 
+- name: Uninstall Runner
+  ansible.builtin.shell: ./svc.sh uninstall
+  args:
+    chdir: /home/ec2-user/github-runner
+
+- name: Install Runner
+  ansible.builtin.shell: ./config.sh remove --token {{secrets.GITHUB_RUNNER_TOKEN}}; ./config.sh --unattended --replace --url https://github.com/s-devops-i2 --token {{secrets.GITHUB_RUNNER_TOKEN}}
+  args:
+    chdir: /home/ec2-user/github-runner
+  become_user: ec2-user
+
+- name: Start Runner
+  ansible.builtin.shell: ./svc.sh install; ./svc.sh start
+  args:
+    chdir: /home/ec2-user/github-runner
+
+- name: Disable default NodeJS Version Module
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Enable NodeJS module for V20
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: Install NodeJS
+  ansible.builtin.dnf:
+    name: nodejs
+    state: installed

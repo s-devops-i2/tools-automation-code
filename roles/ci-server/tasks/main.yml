@@ -1,4 +1,4 @@
-- name: setup prompt for ci-server
+- name: setup prompt for CI-Server
   ansible.builtin.shell: set-prompt ci-server
 
 - name: Create directory

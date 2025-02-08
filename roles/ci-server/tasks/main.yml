@@ -14,8 +14,12 @@
     remote_src: yes
   become_user: ec2-user
 
-- name: install dependencies
-  ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
+#- name: install dependencies
+#  ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
+- name: Install libicu
+  ansible.builtin.dnf:
+    name: libicu
+    state: installed
 
 #- name: Uninstall Runner
 #  ansible.builtin.shell: ./svc.sh uninstall

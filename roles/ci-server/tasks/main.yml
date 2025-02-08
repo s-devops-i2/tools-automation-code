@@ -23,7 +23,8 @@
 #    chdir: /home/ec2-user/github-runner
 
 - name: Install Runner
-  ansible.builtin.shell: ./config.sh --unattended --url https://github.com/s-devops-i2 --token {{secrets.GITHUB_RUNNER_TOKEN}}
+  ansible.builtin.shell: ./config.sh remove --token AWVYNLBSPOLCVQLFETXCL33HU34CS; ./config.sh --unattended --replace --url https://github.com/s-devops-i2   --token {{secrets.GITHUB_RUNNER_TOKEN}}
+
   args:
     chdir: /home/ec2-user/github-runner
   become_user: ec2-user

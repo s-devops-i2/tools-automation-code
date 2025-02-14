@@ -21,10 +21,10 @@
     name: libicu
     state: installed
 
-#- name: Uninstall Runner
-#  ansible.builtin.shell: ./svc.sh uninstall
-#  args:
-#    chdir: /home/ec2-user/github-runner
+- name: Uninstall Runner
+  ansible.builtin.shell: ./svc.sh uninstall
+  args:
+    chdir: /home/ec2-user/github-runner
 
 - name: Install Runner
   ansible.builtin.shell: ./config.sh remove --token {{secrets.GITHUB_RUNNER_TOKEN}}; ./config.sh --unattended --replace --url https://github.com/s-devops-i2   --token {{secrets.GITHUB_RUNNER_TOKEN}}

@@ -55,6 +55,6 @@
 
 - name: Download sonar scanner
   ansible.builtin.unarchive:
-    src: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip
+    src: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
     dest: /opt
     remote_src: yes

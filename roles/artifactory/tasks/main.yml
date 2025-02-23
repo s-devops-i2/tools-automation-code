@@ -1,3 +1,15 @@
 - name: setup prompt for Artifactory
   ansible.builtin.shell: set-prompt Artifactory
 
+- name: copy artifactory repo file
+  ansible.builtin.template:
+    src: artifactory.repo
+    dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
+
+- name: install jfrog
+  ansible.builtin.dnf:
+    name: jfrog-artifactory-oss
+    state: installed
+    enabled: true
+
+

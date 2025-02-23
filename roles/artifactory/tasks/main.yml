@@ -10,6 +10,6 @@
   ansible.builtin.dnf:
     name: jfrog-artifactory-oss
     state: installed
-    enabled: true
+
 
 

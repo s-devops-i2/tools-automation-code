@@ -62,4 +62,4 @@
 - name: install zip
   ansible.builtin.dnf:
     name: zip
-    stat: installed
+    state: installed

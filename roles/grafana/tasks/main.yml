@@ -11,11 +11,15 @@
       name: grafana
       state: installed
 
+- name: copy datasource file
+  ansible.builtin.template:
+    src: dash-datasource.yml
+    dest: /etc/grafana/provisioning/datasource/prom.yml
+
 -  name: Start Grafana
    ansible.builtin.systemd_service:
       name: grafana-server
       state: restarted
       enabled: true
       daemon-reload: true
-
 

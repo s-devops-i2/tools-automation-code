@@ -14,7 +14,7 @@
 - name: copy datasource file
   ansible.builtin.template:
     src: dash-datasource.yml
-    dest: /etc/grafana/provisioning/datasource/prom.yml
+    dest: /etc/grafana/provisioning/datasources/prom.yml
 
 -  name: Start Grafana
    ansible.builtin.systemd_service:

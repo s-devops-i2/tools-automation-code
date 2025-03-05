@@ -17,9 +17,9 @@
     dest: /etc/grafana/provisioning/datasources/prom.yml
 
 - name: copy dashboard template
-  ansible.builtin.template:
-    src: sample-dash.json
-    dest: /tmp/sample-dash.json
+  ansible.builtin.copy:
+    src: node-exporter.json
+    dest: /tmp/node-exporter.json
 
 - name: Create a folder
   community.grafana.grafana_folder:
@@ -38,7 +38,7 @@
     state: present
     commit_message: Updated by ansible
     overwrite: true
-    path: /tmp/sample-dash.json
+    path: /tmp/node-exporter.json
 
 -  name: Start Grafana
    ansible.builtin.systemd_service:

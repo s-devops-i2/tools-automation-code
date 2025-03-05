@@ -21,16 +21,6 @@
     src: sample-dash.json
     dest: /tmp/sample-dash.json
 
-- name: Import Grafana dashboard foo
-  community.grafana.grafana_dashboard:
-    grafana_url: http://grafana.shujadevops.shop:3000
-    grafana_user: "admin"
-    grafana_password: "admin123"
-    state: present
-    commit_message: Updated by ansible
-    overwrite: true
-    path: /tmp/sample-dash.json
-
 - name: Create a folder
   community.grafana.grafana_folder:
     url: "http://grafana.shujadevops.shop:3000"
@@ -38,6 +28,17 @@
     grafana_password: "admin123"
     title: "ProjectDashboard Full"
     state: present
+
+- name: Import Grafana dashboard foo
+  community.grafana.grafana_dashboard:
+    grafana_url: http://grafana.shujadevops.shop:3000
+    grafana_user: "admin"
+    grafana_password: "admin123"
+    folder: ProjectDashboard Full
+    state: present
+    commit_message: Updated by ansible
+    overwrite: true
+    path: /tmp/sample-dash.json
 
 -  name: Start Grafana
    ansible.builtin.systemd_service:

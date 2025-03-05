@@ -31,6 +31,14 @@
     overwrite: true
     path: /tmp/sample-dash.json
 
+- name: Create a folder
+  community.grafana.grafana_folder:
+    url: "http://grafana.shujadevops.shop:3000"
+    grafana_user: "admin"
+    grafana_password: "admin123"
+    title: "ProjectDashboard Full"
+    state: present
+
 -  name: Start Grafana
    ansible.builtin.systemd_service:
       name: grafana-server
